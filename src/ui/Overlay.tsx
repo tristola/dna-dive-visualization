@@ -14,7 +14,9 @@ const STAGES: StageId[] = ['cell', 'nucleus', 'chromatin', 'dna'];
 export default function Overlay() {
   const stage = useScene((s) => s.stage);
   const offset = useScene((s) => s.scrollOffset);
-  const onDna = stage === 'dna';
+  // Gene panel is available a bit earlier — once the camera is past the cell
+  // and approaching the DNA, so users can pre-select a gene to highlight.
+  const panelVisible = offset >= 0.36;
 
   const skipToDna = () => {
     window.dispatchEvent(new CustomEvent<number>('scroll-to-offset', { detail: 0.62 }));
@@ -43,7 +45,7 @@ export default function Overlay() {
         </div>
       </div>
 
-      <GenePanel visible={onDna} />
+      <GenePanel visible={panelVisible} />
       <GeneDetailDrawer />
 
       <div className="overlay-bottom">

@@ -1,10 +1,10 @@
 import { Canvas } from '@react-three/fiber';
-import { Suspense, useRef } from 'react';
+import { MutableRefObject, Suspense, useRef } from 'react';
 import Stage from './scene/Stage';
 import Overlay from './ui/Overlay';
 
 export default function App() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null!) as MutableRefObject<HTMLDivElement>;
 
   return (
     <div className="app-root" ref={containerRef}>
@@ -12,6 +12,8 @@ export default function App() {
         <Canvas
           shadows={false}
           dpr={[1, 1.75]}
+          eventSource={containerRef}
+          eventPrefix="client"
           gl={{
             antialias: true,
             alpha: false,

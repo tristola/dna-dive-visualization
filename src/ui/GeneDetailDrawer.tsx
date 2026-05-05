@@ -12,6 +12,7 @@ type FetchState =
 export default function GeneDetailDrawer() {
   const drawerGeneId = useScene((s) => s.drawerGeneId);
   const setDrawerGene = useScene((s) => s.setDrawerGene);
+  const setSelectedGene = useScene((s) => s.setSelectedGene);
   const [fetchState, setFetchState] = useState<FetchState>({ status: 'idle' });
 
   const gene = SHOWCASE_GENES.find((g) => g.id === drawerGeneId) ?? null;
@@ -44,7 +45,10 @@ export default function GeneDetailDrawer() {
     <section className={`gene-drawer${gene ? ' visible' : ''}`} aria-label={`${gene.id} details`}>
       <button
         className="gene-drawer-close"
-        onClick={() => setDrawerGene(null)}
+        onClick={() => {
+          setDrawerGene(null);
+          setSelectedGene(null);
+        }}
         aria-label="Close gene details"
       >
         ×

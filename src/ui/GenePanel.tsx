@@ -7,7 +7,9 @@ export default function GenePanel({ visible }: { visible: boolean }) {
   const setDrawerGene = useScene((s) => s.setDrawerGene);
 
   const onSelect = (id: string) => {
-    setSelectedGene(id === selectedGeneId ? null : id);
+    // Always select — clicking a different gene swaps; clicking the current
+    // gene re-asserts. To clear, the user closes the drawer.
+    setSelectedGene(id);
     setDrawerGene(id);
   };
 

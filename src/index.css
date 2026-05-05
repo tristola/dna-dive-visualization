@@ -60,6 +60,9 @@ button:active {
   inset: 0;
   overflow: hidden;
   background: radial-gradient(ellipse at 50% 30%, #0c1428 0%, #05080f 60%, #02030a 100%);
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
 .canvas-shell {
