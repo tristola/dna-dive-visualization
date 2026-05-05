@@ -1,6 +1,7 @@
 import { StageId, useScene } from '../lib/store';
 import GenePanel from './GenePanel';
 import GeneDetailDrawer from './GeneDetailDrawer';
+import AudioToggle from './AudioToggle';
 
 const STAGE_LABELS: Record<StageId, string> = {
   cell: 'Cell',
@@ -33,15 +34,18 @@ export default function Overlay() {
           <span className="brand-mark">Inside the Genome</span>
           <span className="brand-title">A scroll-driven dive from cell to DNA</span>
         </div>
-        <div className="stage-indicator" role="status" aria-live="polite">
-          <span className="stage-dots" aria-hidden>
-            {STAGES.map((s) => (
-              <span key={s} className={`stage-dot${s === stage ? ' active' : ''}`} />
-            ))}
-          </span>
-          <span className="stage-name">
-            stage<strong>{STAGE_LABELS[stage]}</strong>
-          </span>
+        <div className="overlay-top-right">
+          <AudioToggle />
+          <div className="stage-indicator" role="status" aria-live="polite">
+            <span className="stage-dots" aria-hidden>
+              {STAGES.map((s) => (
+                <span key={s} className={`stage-dot${s === stage ? ' active' : ''}`} />
+              ))}
+            </span>
+            <span className="stage-name">
+              stage<strong>{STAGE_LABELS[stage]}</strong>
+            </span>
+          </div>
         </div>
       </div>
 

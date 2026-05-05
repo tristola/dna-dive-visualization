@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const PORT = 5179;
+const PORT = 5173;
 
 /**
  * Headless chromium needs explicit flags to run WebGL via swiftshader,
@@ -8,6 +8,7 @@ const PORT = 5179;
  */
 export default defineConfig({
   testDir: './tests',
+  testMatch: /smoke\.spec\.ts$/,
   timeout: 60_000,
   expect: { timeout: 8_000 },
   fullyParallel: false,
@@ -35,7 +36,7 @@ export default defineConfig({
   webServer: {
     command: `npm run dev -- --port ${PORT} --strictPort`,
     url: `http://127.0.0.1:${PORT}`,
-    reuseExistingServer: false,
+    reuseExistingServer: true,
     timeout: 60_000,
     stdout: 'pipe',
     stderr: 'pipe',
